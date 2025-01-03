@@ -2,25 +2,23 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
 namespace ContosoUniversity.Models
 {
-    public class Student
+    public class Instructor
     {
         public int ID { get; set; }
-        [StringLength(60, MinimumLength = 3)]
         [Required]
+        [Display (Name ="Last Name")]
+        [StringLength(50)]
         public string LastName { get; set; }
-        [RegularExpression(@"^[A-Z]+[a-zA-Z\s]*$")]
         [Required]
-        [StringLength(30)]
-        [Display(Name = "First MiddLE Name")]
+        [Display(Name = "First Name")]
+        [StringLength(50)]
         public string FirstMidName { get; set; }
-        [Display(Name = "Enrollment Date")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}", ApplyFormatInEditMode=true)]
-        public DateTime EnrollmentDate { get; set; }
-        [Display(Name ="Full Name")]
+        [DisplayFormat(DataFormatString ="{0:dd-MM-yyyy}, ApplyFormatInEditModel=true")]
+        [Display(Name ="Hire Date")]
+        public DateTime HireDate { get; set; }
         public string FullName
         {
             get
@@ -28,7 +26,7 @@ namespace ContosoUniversity.Models
                 return LastName + "," + FirstMidName;
             }
         }
-
-        public ICollection<Enrollment>? Enrollments { get; set; }
+        public ICollection<CourseAssignment> CourseAssignment { get; set; }
+        public OfficeAssignment? OfficeAssignment { get; set; }
     }
 }
